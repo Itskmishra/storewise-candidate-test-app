@@ -18,13 +18,37 @@
       const allData = Array.from({ length: 40 }, () =>
         Math.floor(Math.random() * 40)
       );
+
       function App() {
         const [currentList, setCurrentList] = React.useState(allData);
+
+        // sort data function
+        const sortData = () => {
+          // spreading list and the sorting in ascending order based on the value is negative then a is before b, if postive the b is before a, otherwise a and b remain same
+          const list = [...currentList].sort((a, b) => a - b);
+          setCurrentList(list);
+        };
+
+        // filtering all odd values.
+        const findAllOdd = () => {
+          // filtering out even number based on the remainder of the equation if it's 0 then even otherwise its odd.
+          const listData = currentList.filter((i) => i % 2 !== 0);
+          setCurrentList(listData);
+        };
+
         return (
           <>
             <div style={{ display: "flex" }}>
-              <button style={{ width: "100px", height: "100px" }}>Sort</button>
-              <button style={{ width: "100px", height: "100px" }}>
+              <button
+                style={{ width: "100px", height: "100px" }}
+                onClick={sortData}
+              >
+                Sort
+              </button>
+              <button
+                style={{ width: "100px", height: "100px" }}
+                onClick={findAllOdd}
+              >
                 Filter Odd Numbers
               </button>
             </div>
